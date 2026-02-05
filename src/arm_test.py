@@ -11,7 +11,7 @@ def main():
     print(f"Connecting to {CONNECTION_STRING}...")
     master = mavutil.mavlink_connection(CONNECTION_STRING, baud=BAUD_RATE)
     master.wait_heartbeat()
-    print("✅ Heartbeat received! Connected.")
+    print("Heartbeat received! Connected.")
 
     # 2. 모드 변경 (안전을 위해 STABILIZED 모드로 변경)
     # (Offboard 제어가 아니라 단순 시동 테스트이므로 기본 모드 사용)
@@ -19,7 +19,7 @@ def main():
     # 여기서는 기본 Arming 명령만 보냅니다.
 
     # 3. 시동 걸기 (Arming)
-    print("⚠️ Arming in 3 seconds... (Make sure PROPS ARE REMOVED!)")
+    print("Arming in 3 seconds... (Make sure PROPS ARE REMOVED!)")
     time.sleep(1)
     print("2...")
     time.sleep(1)
@@ -42,16 +42,16 @@ def main():
     if ack:
         print(f"Result: {ack.result}")
         if ack.result == 0:
-            print("🎉 ARMING SUCCESS! Motors should be spinning.")
+            print("ARMING SUCCESS! Motors should be spinning.")
         else:
-            print(f"❌ ARMING FAILED. Error code: {ack.result}")
+            print(f"ARMING FAILED. Error code: {ack.result}")
             print("Tip: Check Safety Switch, Battery, or GPS Lock.")
     else:
-        print("❌ No response from drone.")
+        print("No response from drone.")
 
     # 5. 5초 후 시동 끄기 (Disarm)
     time.sleep(5)
-    print("\n🛑 Sending DISARM command...")
+    print("\n Sending DISARM command...")
     master.mav.command_long_send(
         master.target_system,
         master.target_component,
